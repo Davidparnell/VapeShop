@@ -15,16 +15,17 @@ adding more features and components -->
 	{
 		$login = "Login";
 	}
-
+	
+	//Connect to the db and check if logged in 
 	$db = mysqli_connect("localhost","root","","groupproject");
-	$uname = $_POST['uname'];
-	$pword = $_POST['psw'];
-	$result = mysqli_query($db,"select username from users where USERNAME = '$uname' and PASSWORD = '$psw'");
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$result = mysqli_query($db,"select username from users where username = '$username' and password = '$password'");
 	$numrows = mysqli_num_rows($result);
 	if ($numrows == 1) // one result indicates successful login
 	{
-		//session_register("uname");
-        $_SESSION['Login_Status'] = $uname;
+		//session_register("username");
+        $_SESSION['Login_Status'] = $username;
 		//echo $result;
         header("location: Home.php"); // redir
 	}
@@ -77,6 +78,7 @@ adding more features and components -->
 </head>
 
 <body>
+	<!-- Headed-->
 	<header class="container-fluid text-center">
 		<div class="container-fluid">
 			<h1>VAPE SHOP</h1>
@@ -84,6 +86,8 @@ adding more features and components -->
 			<a href="#" class="glyphicon glyphicon-search"></a>
 		</div>
 	</header>
+	
+	<!--Nav Bar-->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -117,22 +121,24 @@ adding more features and components -->
 						</div>
 					
 						<div class="modal-body" style="padding:40px 50px;">
-							<form role="form">
 							<div class="form-group">
-								<label for="uname"><span class="glyphicon glyphicon-user"></span> Username</label>
-								<input type="text" class="form-control" name="uname" placeholder="Enter email">
-							</div>
+
+							<form role="form" action = "" method = "post">
+								<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+								<input type="text" class="form-control" name="username" placeholder="Enter Username">
+								<label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+								<input type="text" class="form-control" name="password" placeholder="Enter password">
+							
 						
-							<div class="form-group">
-								<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-								<input type="text" class="form-control" name="psw" placeholder="Enter password">
+								<div class="checkbox">
+									<label><input type="checkbox" value="" checked>Remember me</label>
+								</div>
+								<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+								<?php 
+									echo $errormsg; 
+								?>
+								</form>
 							</div>
-						
-							<div class="checkbox">
-								<label><input type="checkbox" value="" checked>Remember me</label>
-							</div>
-							<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
-							</form>
 						</div>
 					
 						<div class="modal-footer">
