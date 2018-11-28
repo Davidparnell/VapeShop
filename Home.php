@@ -3,7 +3,7 @@ adding more features and components -->
 
 <!-- Check if the user is logged in and change the content
  of the log in button to reflect that -->
-<?php
+ <?php
 	$errormsg = "";
 	session_start();
 	
@@ -50,7 +50,14 @@ adding more features and components -->
 	
 	<style>
 		/* Add a gray background color and some padding to the footer */
-		
+	header {
+      background-color: #212121;
+      padding: 25px;
+    }
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
 		.modal-header, h4, .close {
 		background-color: #101010;
 		color:white !important;
@@ -67,6 +74,8 @@ adding more features and components -->
 			width: 100%;
 			background-color: #101010;
 		}
+
+
     </style>
 	<script>
 		$(document).ready(function(){
@@ -81,14 +90,14 @@ adding more features and components -->
 	<!-- Headed-->
 	<header class="container-fluid text-center">
 		<div class="container-fluid">
-			<h1>VAPE SHOP</h1>
+			<a href="Home.php" style="color: white; text-decoration: none"><h1>VAPE SHOP</h1></a>
 			<input type="text" placeholder="Search items..">
-			<a href="#" class="glyphicon glyphicon-search"></a>
+			<a href="#" class="glyphicon glyphicon-search" style="color: white; text-decoration: none"></a>
 		</div>
 	</header>
 	
 	<!--Nav Bar-->
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse" style="border: none">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -96,19 +105,17 @@ adding more features and components -->
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand glyphicon glyphicon-home" href="#"></a>
+				<a class="navbar-brand glyphicon glyphicon-home" href="Home.php"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="Hardware.php">Hardware</a></li>
+					<li><a class="active" href="Hardware.php">Hardware</a></li>
 					<li><a href="Liquid.php">Liquid</a></li>
-					<li><a href="#">Contact Us</a></li>
+					<li><a href="#aboutus">About Us</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
-					<li><button type="button" class="btn btn-default btn-lg" id="myBtn"><?php 
-					echo $login; ?></button></li></li>
+					<li><a href="#" role="button" id="myBtn"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
 					
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
@@ -165,26 +172,27 @@ adding more features and components -->
 					</ol>
 
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img src="https://placehold.it/800x400?text=IMAGE" alt="Image">
+						<div class="item active"><!--<a href="Home.php">-->
+							<img src="img/Home/specialoffer1.png" alt="Image">
 							<div class="carousel-caption">
-								<h3>Item1</h3>
-								<p>Special Offer1</p>
-							</div>
+								<h3>Vaporesso Target Mini TC 40W Starter Kit</h3>
+								<p>with 1400mAh build-in Battery (Steel)</p>
+								
+							</div><!--</a>-->
 						</div>
 
 						<div class="item">
-							<img src="https://placehold.it/800x400?text=IMAGE" alt="Image">
+							<img src="img/Home/specialoffer2.png" alt="Image">
 							<div class="carousel-caption">
-								<h3>Item2</h3>
-								<p>Special Offer2</p>
+								<h3>E-Pipe Vapcig. 1x Wood Effect Pipe Bowl. 2x Mouthpieces. 2x Atomizers. 2x 18350 Batteries</h3>
+								<p>New Improved Battery Charger. Presentation Box. Eshisha. Ehookah. Electronic Pipe. No Tar. No Nicotine. No Tobacco.</p>
 							</div>
 						</div>
 						<div class="item">
-							<img src="https://placehold.it/800x400?text=IMAGE" alt="Image">
+							<img src="img/Home/specialoffer3.png" alt="Image">
 							<div class="carousel-caption">
-								<h3>Item3</h3>
-								<p>Special Offer3</p>
+								<h3>IMECIG® 5 Pack Multi Juicy Fruits E Liquid Premium E Juice</h3>
+								<p>Apple + Grape + Watermelon + Cherry + Cola) Vape VG Juice Multipack Flavours, No Nicotine (Juicy Fruits)</p>
 							</div>
 						</div>
 					</div>
@@ -215,7 +223,7 @@ adding more features and components -->
 	</div>
 
 	<div class="container text-center" id="part1">
-		<h3>What We Have</h3>
+		<h3>We Also Have..</h3>
 		<br>
 		<div class="row">
 			<div class="col-sm-3">
@@ -227,20 +235,12 @@ adding more features and components -->
 				<p>Project 2</p>
 			</div>
 			<div class="col-sm-3">
-				<div class="well">
-					<p>Some text..</p>
-				</div>
-				<div class="well">
-					<p>Some text..</p>
-				</div>
+				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+				<p>Project 2</p>
 			</div>
 			<div class="col-sm-3">
-				<div class="well">
-					<p>Some text..</p>
-				</div>
-				<div class="well">
-					<p>Some text..</p>
-				</div>
+				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+				<p>Project 2</p>
 			</div>
 		</div>
 		<hr>
@@ -275,8 +275,8 @@ adding more features and components -->
 		
 	</div><br>
 
-	<footer class="container-fluid text-center" id="footer">
-		<h2 class="text-left" style="color:yellowgreen">About us</h2>
+	<footer class="container-fluid text-center">
+		<h2 class="text-left" style="color:yellowgreen" id="aboutus">About us</h2>
 		<div class="row">
 			<div class="col-sm-4">
 				<p style="padding:10px">

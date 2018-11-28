@@ -1,0 +1,207 @@
+<!-- We are using a bootscrap template from W3Schools for the basic desgin of our homepage
+adding more features and components -->
+
+<!-- Check if the user is logged in and change the content
+ of the log in button to reflect that -->
+
+
+<html>
+<html lang="en">
+
+<head>
+	<title>Vape Website</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<style>
+		/* Add a gray background color and some padding to the footer */
+	header {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+		.modal-header, h4, .close {
+		background-color: #101010;
+		color:white !important;
+		text-align: center;
+		font-size: 30px;
+		}
+		.modal-footer {
+			background-color: #101010;
+			color: white;
+		}
+		
+		.btn-block {
+			display: block;
+			width: 100%;
+			background-color: #101010;
+		}
+
+.sidenav {
+    /* margin-top: 200px;
+    margin-bottom: 200px; */
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    /* z-index: 1; */
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    /* padding-top: 20px; */
+}
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+    </style>
+	<script>
+		$(document).ready(function () {
+			$("#myBtn").click(function () {
+				$("#myModal").modal();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<!-- Headed-->
+	<header class="container-fluid text-center">
+		<div class="container-fluid">
+			<a href="Home.php" style="color: inherit; text-decoration: none">
+				<h1>VAPE SHOP</h1>
+			</a>
+			<input type="text" placeholder="Search items..">
+			<a href="#" class="glyphicon glyphicon-search" style="color: inherit; text-decoration: none"></a>
+		</div>
+	</header>
+
+	<!--Nav Bar-->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand glyphicon glyphicon-home" href="Home.php"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="Home.php">Home</a></li>
+					<li><a href="Hardware.php">Hardware</a></li>
+					<li><a href="Liquid.php">Liquid</a></li>
+					<li><a href="#aboutus">About Us</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
+					<li><a href="#" role="button" id="myBtn"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header" style="padding:35px 50px;">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+								</div>
+
+								<div class="modal-body" style="padding:40px 50px;">
+									<div class="form-group">
+
+										<form role="form" action="" method="post">
+											<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
+											<input type="text" class="form-control" name="username" placeholder="Enter Username">
+											<label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+											<input type="text" class="form-control" name="password" placeholder="Enter password">
+
+
+											<div class="checkbox">
+												<label><input type="checkbox" value="" checked>Remember me</label>
+											</div>
+											<button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+
+										</form>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
+										Cancel</button>
+									<p>Not a member? <a href="Register.php">Sign Up</a></p>
+									<p>Forgot <a href="#">Password?</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- <div class="container">
+    <div class="col sidenav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+      </div>
+    <div class="main">
+        <p><br/><br/><br/><br/><br/><br/><br/s><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
+    </div>
+</div> -->
+	<div class="well">
+		<div class="row">
+			<div class="col-sm-3">
+				<img src="img/Home/specialoffer1.png" class="img-responsive" style="width:100%" alt="Image">
+			</div>
+			<div class="col-sm-7">
+				<h3>Product Name</h3>
+				<p>Price</p>
+				<p>Description</p>
+			</div>
+			<div class="col-sm-2">
+				<button>Add to My Cart</button>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="container-fluid text-center">
+		<h2 class="text-left" style="color:yellowgreen" id="aboutus">About us</h2>
+		<div class="row">
+			<div class="col-sm-4">
+				<p style="padding:10px">
+					8 Parker House Myrtle Court<br>
+					The Coast, Baldoyle<br>
+					Dublin 13, Ireland<br>
+					<p>9am to 8pm</p>
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<p style="font-size: 20px">Call Us On</p>
+				<h3 style="color:yellowgreen">+353-1-495-2222</h3>
+				<p>9am to 8pm</p>
+				<p style="font-size: 15px">vapeshop.info@vapeshop.com</p>
+			</div>
+			<div class="col-sm-4">
+				<img src="img/Footer/payment.jpg" class="img-responsive" style="width:100%; max-width: 200px;" alt="Image"></img>
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>
