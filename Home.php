@@ -17,11 +17,14 @@ adding more features and components -->
 	}
 	
 	//Connect to the db and check if logged in 
-	$db = mysqli_connect("localhost","root","","groupproject");
+	require 'conn.php';
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$result = mysqli_query($db,"select username from users where username = '$username' and password = '$password'");
-	$numrows = mysqli_num_rows($result);
+	
+	$check = "select username from users where username = '$username' and password = '$password'";
+	$status=$con->query($check);
+	
+	$numrows = mysqli_num_rows($status);
 	if ($numrows == 1) // one result indicates successful login
 	{
 		//session_register("username");
@@ -74,8 +77,6 @@ adding more features and components -->
 			width: 100%;
 			background-color: #101010;
 		}
-
-
     </style>
 	<script>
 		$(document).ready(function(){
@@ -109,13 +110,17 @@ adding more features and components -->
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li><a class="active" href="Hardware.php">Hardware</a></li>
-					<li><a href="Liquid.php">Liquid</a></li>
-					<li><a href="#aboutus">About Us</a></li>
+					<li><a href="Products.php">Products</a></li>
+					<li><a href="#">About Us</a></li>
+				</ul>
+				<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">=
+					<li><a href="#">Contact Us</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
-					<li><a href="#" role="button" id="myBtn"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+					<li class="active"><a href="Basket.php"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
+					<li><button type="button" class="btn btn-default btn-lg" id="myBtn"><?php 
+					echo $login; ?></button></li></li>
 					
 					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">

@@ -9,7 +9,6 @@
 		$email = test_input($_POST["email"]); //normal email format
 		$password = test_input($_POST["password"]); // 8-10 digits only
 		$re_password = test_input($_POST["re_password"]); // 8-10 digits only, should be the same with the other password
-
 		if ($name == NULL || $address == NULL || $uname == NULL || $email == NULL || $password == NULL || $re_password == NULL){
 			$form_err = "Please fill in all fields";
 		}
@@ -27,7 +26,6 @@
 			&& preg_match('/@.+\./', $email);
 	}
 	
-
 	
 ?>
 <html>
@@ -65,7 +63,6 @@
 			$("#myBtn").click(function(){
 				$("#myModal").modal();
 			});
-
 			$("#signupsubmit").click(function(){ 
 				var nm = $("#name_msg");
 				var nameReturnStr;
@@ -77,20 +74,9 @@
 				$("#err1").text(nameReturnStr);
 			 });
 		});
-	</script>
-
+	</script>	
 	</head>
-	
-	<body>
-	<header class="container-fluid text-center">
-		<div class="container-fluid">
-			<a href="Home.php" style="color: white; text-decoration: none"><h1>VAPE SHOP</h1></a>
-			<input type="text" placeholder="Search items..">
-			<a href="#" class="glyphicon glyphicon-search" style="color: white; text-decoration: none"></a>
-		</div>
-	</header>
-	
-	<!--Nav Bar-->
+<!--Nav Bar-->
 	<nav class="navbar navbar-inverse" style="border: none">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -157,7 +143,7 @@
 		<div class="">
 			<div class="col-sm-4">
 				<div class="well">
-					<img src="Images/Register/Quit.jpg" style="height:300px">
+					<img src="img/Register/Quit.jpg" style="height:300px">
 				</div>
 				<div class="well">
 					<p>Want to get everything you need to quit smoking delivered right
