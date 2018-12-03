@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2018 at 02:31 PM
+-- Generation Time: Dec 03, 2018 at 05:55 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `Name` varchar(30) COLLATE tis620_bin NOT NULL,
-  `Address` varchar(50) COLLATE tis620_bin NOT NULL,
-  `Username` varchar(10) COLLATE tis620_bin NOT NULL,
+  `Address` varchar(150) COLLATE tis620_bin NOT NULL,
+  `Username` varchar(12) COLLATE tis620_bin NOT NULL,
   `Password` varchar(15) COLLATE tis620_bin NOT NULL,
-  `Email` varchar(20) COLLATE tis620_bin NOT NULL
+  `Email` varchar(50) COLLATE tis620_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 
 --
@@ -41,7 +41,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Name`, `Address`, `Username`, `Password`, `Email`) VALUES
-('', '', 'Davidp', '123456', 'davidpcao5@gmail.com');
+('Jihye', '8 Parker House Myrtle Court The Coast, Baldoyle Du', 'Jihye', '123456', 'd18123446@mydit.ie'),
+('Tanya Tompson', 'unknown', 'TanyaT', '123456', 'davidandjiyhe@highmark.com'),
+('David Parnell', '223 Orwell Park Heights, Templeogue', 'davidparnell', '123456789', 'davidpcao5@gmail.com');
 
 --
 -- Indexes for dumped tables
