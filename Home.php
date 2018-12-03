@@ -169,20 +169,20 @@ adding more features and components -->
 		<br>
 		<div class="row">
 			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-				<p>Current Project</p>
+				<img src="img/Home/VVHeisenberg.jpg" class="img-responsive" style="width:300px; height:300px" alt="Image">
+				<p>Vampire Vapes</p>
 			</div>
 			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-				<p>Project 2</p>
+				<img src="img/Home/SandmanCactus.png" class="img-responsive" style="width:300px; height:300px" alt="Image">
+				<p>Sandman</p>
 			</div>
 			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-				<p>Project 2</p>
+				<img src="img/Home/CCDanish.jpg" class="img-responsive" style="width:300px height:300px" alt="Image">
+				<p>Captains Custard</p>
 			</div>
 			<div class="col-sm-3">
-				<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-				<p>Project 2</p>
+				<img src="img/Home/Cakery.jpg" class="img-responsive" style="width:300px; height:300px" alt="Image">
+				<p>The Cakery</p>
 			</div>
 		</div>
 		<hr>
