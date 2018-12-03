@@ -1,36 +1,39 @@
 <?php
-session_start();
-if (isset($_SESSION['Login_Status'])) //is logged in
-{
-    $login = "Logout";
-    $db = mysqli_connect("localhost","root","","groupproject");
-	$welcome = $_SESSION['Login_Status'];
-}
-else //not logged in
-{
-    header("location: Home.php");
-    $login = "Login";
-}
-
+	$errormsg = "";
+	session_start();
+	
+	if (isset($_SESSION['Login_Status'])) //Is logged in? - set button text
+	{
+		$login = "Logout";
+	}
+	else
+	{
+		$login = "Login";
+	}
+	
+	
 	//Connect to the db and check if logged in 
-$db = mysqli_connect("localhost","root","","groupproject");
-$username = $_POST['username'];
-$password = $_POST['password'];
-$result = mysqli_query($db,"select username from users where username = '$username' and password = '$password'");
-$numrows = mysqli_num_rows($result);
-if ($numrows == 1) // one result indicates successful login
-{
-	//session_register("username");
-	$_SESSION['Login_Status'] = $username;
-	//echo $result;
-    header("location: Home.php"); // redir
-}
-else
-{
-	$errormsg = "Incorrect User Name and Password";
-}
+	require 'conn.php';
+	$username = $_POST['username'];
+	$password = $_POST['password'];
 	
+	$check = "select username from users where username = '$username' and password = '$password'";
+	$status=$con->query($check);
+	$numrows = mysqli_num_rows($status);
+	if ($numrows == 1) // one result indicates successful login
+	{
+		//session_register("username");
+        $_SESSION['Login_Status'] = $username;
+		//echo $result;
+        header("location: Home.php"); // redir
+	}
+	else
+	{
+		$errormsg = "Incorrect User Name and Password";
+	}
 	
+	$remove= "removeBasket.php?ID=";
+
 ?>
 
 <html>
@@ -48,11 +51,15 @@ else
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 	<script>
+		//Modal Function
 		$(document).ready(function(){
 			$("#myBtn").click(function(){
 				$("#myModal").modal();
 			});
 		});
+		
+		//Slider fuction using JQuery
+		var slider = new Slider('#slide',{});
 	</script>
 </head>
 
@@ -61,8 +68,6 @@ else
 	<header class="container-fluid text-center">
 		<div class="container-fluid">
 			<h1>VAPE SHOP</h1>
-			<input type="text" placeholder="Search items..">
-			<a href="#" class="glyphicon glyphicon-search"></a>
 		</div>
 	</header>
 	
@@ -79,11 +84,10 @@ else
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li><a href="Products.php">Products</a></li>
-					 
+					<li ><a href="Products.php">Products</a></li> 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
+					<li class="active"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
 					<li><button type="button" class="btn btn-default btn-lg" id="myBtn"><?php 
 					echo $login; ?></button></li></li>
 					
@@ -131,24 +135,100 @@ else
 		</div>
 	</nav>
 	
-	<div class="container">
-		<div class="col-sm-6">
-			<div class="well">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/gqEhNRcRj_k" 
-					frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen autoplay="1">
-					</iframe>
-				</div>
-			<div class="well">
-			<p>
-			Due to the context of this sites creation we cannot accept credit/debit card
-			payments at this time as we currently do not have a connection to a credit/debit
-			card server or paypal. We're sorry for any inconvenience this may have caused
-			but let's be real here, this isn't a real site and you're not going to try 
-			buy stuff online from a student created website.
-			</p>
+	
+	<div class="col-sm-16">
+		<div class="col-sm-2">
+		</div>
+		
+		<div class="col-sm-10">
+			<div class="basket">
+				<table class="tbl-cart" cellspacing="1">
+					<tr>
+					<th>Name</th>
+					<th>Brand</th>
+					<th>Type</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th style="text-align:center;">Remove</th>
+					</tr>
+					
+					<?php
+	
+						var_dump($_SESSION['cart']);
+						
+						$whereIn = implode(',',$_SESSION['cart']);
+	
+						$query= "select * from products where ID in($whereIn)";
+						
+						$total = 0;
+						
+						$result=$con->query($query);
+						
+						//If rows are found
+						if($result->num_rows >0)
+						{	
+							//While the DB has rows print
+							while($row= mysqli_fetch_array($result))
+							{
+								echo "<table class='basket'><tr>
+								<td>".$row["Name"]."</td>
+								<td>".$row["Brand"]."</td>
+								<td>".$row["PType"]."</td>
+								<td>".$row["Price"]."</td>
+								<td>";
+								echo "<a href=".$remove. $row['ID'].">Remove</a>";
+								"</td></tr>
+								</table>";
+								$total = $total + $row["Price"];
+							}
+						}
+						
+						else
+						{
+							echo "Basket Empty";
+						}
+					?>
+				</table>
+				
+				<table class="info">
+					<tr><td width="15%">Number of items:</td>
+					<td width="5%"><?php 
+					
+					$number = $result->num_rows;
+					
+					if($number > 0)
+					{
+						echo "$number";
+					}
+					else
+					{
+						echo "Basket empty";
+					}
+					?>
+					</td>
+					<td style="text-align:center ;" width="10%">Total:</td>
+					<td width="5%">€<?php
+						echo $total;
+					?>
+					</td>
+				</table>
 			</div>
+			</br>
+			<!-- Payment Button -->
+			<form action="Payment.php">
+				<label>Proceed to Payment</label></br>
+				<input type="submit" value="Proceed" />
+			</form>
+			
+			<form action="emptyBasket.php">
+				<label>Empty basket"</label></br>
+				<input type="submit" value="Empty" />
+			</form>
+		</div>
+		
+		<div class="col-sm-4">
 		</div>
 	</div>
+	
 </body>
-</html>
+</html>+

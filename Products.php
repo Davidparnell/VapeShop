@@ -11,7 +11,7 @@
 		$login = "Login";
 	}
 	
-	$addBasket = "AddBasket.php? id=";//
+	$addBasket ="addBasket.php?ID=";//file to add to basket
 	
 	//Connect to the db and check if logged in 
 	require 'conn.php';
@@ -34,6 +34,19 @@
 		$errormsg = "Incorrect User Name and Password";
 	}
 	
+	//Set max and min prices
+	$min = 6;
+	$max = 120;
+
+	if (! empty($_GET['min'])) 
+	{
+		$min = $_GET['min'];
+	}
+
+	if (! empty($_GET['max'])) 
+	{
+		$max = $_GET['max'];
+	}
 	
 ?>
 
@@ -44,146 +57,16 @@
 	<title>Vape Website</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vapeShop.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	
-	<style>
-		<!-- Add a gray background color and some padding to the footer-->
-		
-		.modal-header, h4, .close {
-		background-color: #101010;
-		color:white !important;
-		text-align: center;
-		font-size: 30px;
-		}
-		.modal-footer {
-			background-color: #101010;
-			color: white;
-		}
-		
-		.catalogue
-		{
-			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			border-collapse: collapse;
-			width: 100%;
-		}
-		
-		.customers td, #customers th 
-		{
-			border: 1px solid #ddd;
-			padding: 8px;
-		}
-		
-		
-		.catalogue tr:nth-child(even)
-		{
-			background-color: #f2f2f2;
-		}
-
-		.catalogue tr:hover 
-		{
-			background-color: #ddd;
-		}
-
-		
-		.btn-block {
-			display: block;
-			width: 100%;
-			background-color: #101010;
-		}
-		
-		.wrapper {
-			display: flex;
-			align-items: stretch;
-		}
-
-		#sidebar {
-			min-width: 200px;
-			max-width: 200px;
-			min-height: 100vh;
-		}
-		
-		body 
-		{
-			background: #fafafa;
-		}
-
-		p {
-			font-size: 1.1em;
-			font-weight: 300;
-			line-height: 1.7em;
-			color: #999;
-		}
-
-		a, a:hover, a:focus {
-			color: inherit;
-			text-decoration: none;
-			transition: all 0.3s;
-		}
-
-		@media (max-width: 768px) 
-		{
-			#sidebar {
-			margin-left: -250px;
-			}
-			#sidebar.active {
-			margin-left: 0;
-			}
-		}
-		
-		#sidebar {
-		/* don't forget to add all the previously mentioned styles here too */
-			background: white;
-			color: black;
-			transition: all 0.3s;
-		}
-
-		#sidebar .sidebar-header {
-			padding: 20px;
-			color: white;
-			background: #101010;
-		}
-
-		#sidebar ul.components {
-			padding: 20px;
-			border-style: solid;
-			border-color: #101010;
-		}
-
-		#sidebar ul p {
-			color: black;
-			padding: 10px;
-		}
-
-		#sidebar ul li a {
-			padding: 10px;
-			font-size: 1.1em;
-			display: block;
-		}
-	
-		#sidebar ul li a:hover {
-			color: #7386D5;
-			background: #fff;
-		}
-
-		ul ul a {
-			font-size: 0.9em;
-			padding-left: 30px;
-			background: #6d7fcc;
-		}
-		
-		td
-		{
-			padding:0 15px 0 15px;
-		}
-		
-		input[type=text]
-		{
-			width:100%;
-		}
-		
-    </style>
 	<script>
 		//Modal Function
 		$(document).ready(function(){
@@ -191,9 +74,6 @@
 				$("#myModal").modal();
 			});
 		});
-		
-		//Slider fuction using JQuery
-		var slider = new Slider('#slide',{});
 		
 	</script>
 </head>
@@ -204,8 +84,6 @@
 	<header class="container-fluid text-center">
 		<div class="container-fluid">
 			<h1>VAPE SHOP</h1>
-			<input type="text" placeholder="Search items..">
-			<a href="#" class="glyphicon glyphicon-search"></a>
 		</div>
 	</header>
 	
@@ -223,10 +101,10 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li><a href="Products.php">Products</a></li>
-					<li><a href="#">Contact Us</a></li>
+					 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="Basket.php"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
+					<li><a href="Basket.php"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li>
 					<li><button type="button" class="btn btn-default btn-lg" id="myBtn"><?php 
 					echo $login; ?></button></li></li>
 					
@@ -247,7 +125,7 @@
 								<label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
 								<input type="text" class="form-control" name="username" placeholder="Enter Username">
 								<label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-								<input type="text" class="form-control" name="password" placeholder="Enter password">
+								<input type="password" class="form-control" name="password" placeholder="Enter password">
 							
 						
 								<div class="checkbox">
@@ -287,25 +165,31 @@
 				<ul class="list-unstyled components">
 					<li>
 						<!-- Select product type, Liquid, hardware or all products (default) -->
-						<form action="">
-							<input type="radio" name="filterType" value="Liquid">Liquid<br>
-							<input type="radio" name="filterType" value="Hardware">Hardware<br>
-							<input type="radio" name="filterType" value="All" checked>All
-						</form>
-					</li>
-					<!-- Slider to set price range-->
-					<li>
-						<p>SLIDER</p>
-					</li>
-					
-					<li>
-						 <label>Search:</label> 
-						 <input type="text" name="search_box" value=" "/>
-					</li>
-					
-					<!-- Filter button -->
-					<li>
-						<input type="submit" value="Filter" name="Filter" id="Filter">
+						<form action="post" >
+							<!-- Slider to set price range-->
+							<div>
+								<input type="radio" name="type" value="Liquid">Liquid<br>
+								<input type="radio" name="type" value="Hardware">Hardware<br>
+								<input type="radio" name="type" value="All" checked>All<br>
+								
+								<p>Price Range:</p>
+								<table class="rangeTbl">
+								<tr><td>
+								<td>
+								<input type="text" class="min" name="min_price"
+								value="<?php echo $min; ?>"></td>
+								<td><p>-</p></td>
+								<td><input type="text" class="max" name="max_price"
+								value="<?php echo $max; ?>"></td>
+								</table>
+							</div>
+							<div>
+								</br>
+								<input type="submit" name="submit_range"
+								value="Filter Product" class="btn-submit">
+							</div>
+							
+						</form>	
 					</li>
 				</ul>
 			</nav>
@@ -314,34 +198,76 @@
 			
 		<!-- Print database results -->
 		<div class="col-sm-8">
-		
+		<div class="displays">
 		<?php
-			require 'conn.php';
-			$query="select * from products";
+			if(isset($_POST['sub']))
+			{
+				/*
+				if(isset($_POST['filterType']) == "Liquid")
+				{
+					$query="select * from products where(PType = 'Liquid')";
+				}
+				//Hardware - Select all where PType = hardware
+				elseif(isset($_POST['filterType'])== "Hardware") 
+				{	
+					$query="select * from products where(PType = 'Hardware')";
+				}
+				//Default - Select all with not filter
+				else
+				{
+					$query="select * from products";
+				}
+				*/
+				
+				$searched= mysqli_real_escape_string($_POST['search']);
+					
+				$query ="SELECT * FROM products WHERE Name LIKE '%$searched%'";
+				
+			}				
+			else
+			{
+				$query = "select * from products where Price BETWEEN '$min' AND '$max' ";
+			}
+			
+			
 			$result=$con->query($query);
 			
+			//If rows are found
+			if($result->num_rows >0)
+			{	
+				//Print number of results found
+				echo "$result->num_rows";				
+				echo "	Results Found<br><br>";
 				
-			//While the DB has rows print
-			while($row= mysqli_fetch_array($result))
+				//While the DB has rows print
+				while($row= mysqli_fetch_array($result))
+				{
+					echo '<td><div style="border-bottom: 1px solid #101010; padding: 25px;"></td>';
+					
+					echo 
+					"<br><table class='catalogue'>
+					<tr><td>";
+					echo '<img src="data:Image/jpeg;base64,'.base64_encode( $row['Image'] ).'" style="width:150px;height=150px;"/></br>';
+					echo "</td><td>";
+					echo "<tr class='brand'>".$row["Brand"]."</tr></br>";
+					echo "<tr>".$row["Name"]."</tr></br>";
+					echo "<tr>".$row["PType"]."</tr></br>";
+					echo "<tr>".$row["Description"]."</tr></br>";
+					echo "<tr><td>€".$row["Price"]."</td><td>";
+					echo"<a href=".$addBasket. $row['ID']." class='addButton'>Add to Cart</a>";
+					echo"</td></tr></td>
+					</table></br></br>";
+					
+					echo "</div>";
+				}//end while
+			}
+			else
 			{
-				echo '<img src="data:Image/jpeg;base64,'.base64_encode( $row['Image'] ).'" style="width:150px;height=150px;"/>';	
-				
-				echo 
-				"<table>
-				<tr><td>
-				<tr>".$row["Brand"]."</tr></br>
-				<tr>".$row["Name"]."</tr></br>
-				<tr>".$row["PType"]."</tr></br>
-				<tr>".$row["Description"]."</tr></br>
-				<tr>
-				<td>".$row["Price"]."</td>
-				<td><a href=".$addBasket.$row['ID'].">Add to Basket</a></td>
-				</tr>
-				</table>";
-			}//end while
-		?>
+				echo "<div class='no-result'>No Results</div>";
+			}
+			?>
 		</div>
-		
+		</div>
 		<div class="col-sm-2">
 		</div>
 	</div><!--end main body-->

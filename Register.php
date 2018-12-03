@@ -3,7 +3,6 @@
 	$name = $addr = $uname = $email = $password = $re_password = "";
 	$completeMsg = ""; //the sign up hasn't been completed
 	$successful = 1; //true, the form status - completed now
-
 	// echo '<script type="text/javascript">alert("hello!");</script>';
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// name validation
@@ -34,12 +33,10 @@
 				$unameErr = "The user name has to be characters without spaces only.";
 				$successful = 0;
 			}
-
 			require 'conn.php';
 			
 			$sql = "SELECT Username FROM users WHERE Username LIKE '$uname'";
 			$result = $con->query($sql);
-
 			if ($result->num_rows > 0) { //someone is using the same username, the user has to change the username
 				$unameErr = "Someone is using the username, please use another username.";
 				$successful = 0;
@@ -90,19 +87,14 @@
 			$stmt = $con->prepare("INSERT INTO users (Name, Address, Username, Email, Password) VALUES (?, ?, ?, ?, ?)");
 			$stmt->bind_param("ssssi", $name, $addr, $uname, $email, $password);
 			$stmt->execute();
-
 			$stmt->close();
 			$con->close();
-
 			$nameErr = $addrErr = $unameErr = $emailErr = $passwordErr = $re_passwordErr = "";
 			$name = $addr = $uname = $email = $password = $re_password = "";
 			$completeMsg = "You have successfully signed up!";
-
 			
 		}
-
 	}
-
 	function test_input($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
@@ -229,7 +221,7 @@
 		<div class="">
 			<div class="col-sm-4">
 				<div class="well">
-					<img src="Images/Register/Quit.jpg" style="height:300px">
+					<img src="img/Register/Quit.jpg" style="height:300px">
 				</div>
 				<div class="well">
 					<p>Want to get everything you need to quit smoking delivered right
@@ -271,7 +263,7 @@
 					</div>
 					<div class="form-group">
 						<label>Password:</label>
-						<input type="password" name="passwrd" minlength="5" maxlength="10" placeholder="Enter your password, 5-10 numbers only" 
+						<input type="password" name="password" minlength="5" maxlength="10" placeholder="Enter your password, 5-10 numbers only" 
 						value="<?php echo $password ?>" class="form-control" id="password" required>
 						<span class="error"> <?php echo $passwordErr;?></span>
 					</div>

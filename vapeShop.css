@@ -1,0 +1,227 @@
+
+
+/*Headers - all pages */
+header {
+	background-color: #212121;
+	padding: 25px;
+	}
+		
+footer {
+	background-color: #f2f2f2;
+	padding: 25px;
+}
+.modal-header, h4, .close {
+	background-color: #101010;
+	color:white !important;
+	text-align: center;
+	font-size: 30px;
+}
+.modal-footer {
+	background-color: #101010;
+	color: white;
+}
+		
+.btn-block {
+	display: block;
+	width: 100%;
+	background-color: #101010;
+}
+
+h1
+{
+		color:white;
+}
+
+ul ul a {
+	font-size: 0.9em;
+	padding-left: 30px;
+	background: #6d7fcc;
+}
+		
+table, td
+{
+	width: 25%;
+	padding:0px;
+}
+		
+table, tr
+{
+	width: 100%;
+	padding:0px;
+}
+
+.btnAddAction 
+{		
+	background-color: #efefef;
+	border: #E0E0E0 1px solid;
+	color: #211a1a;
+	text-decoration: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+		
+.displays
+{
+	align-items:left;
+}
+		
+.cart-action
+{
+	width:10%;
+	height:5%;
+}		
+
+
+/*General - all pages */
+body 
+{
+	background: #fafafa;
+}
+
+p {
+	font-size: 1.1em;
+	font-weight: 300;
+	line-height: 1.7em;
+	color: #999;
+}
+
+a, a:hover, a:focus {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+		
+/*Side Bar - Products.php */		
+.min
+{
+	width: 30px;
+}
+
+
+.max 
+{
+	width: 30px;
+}
+
+.no-result 
+{
+	padding: 20px;
+	background: #ffdddd;
+	text-align: center;
+	border-top: #d2aeb0 1px solid;
+	color: #6f6e6e;
+}
+
+				
+#sidebar {
+	width: 200px;
+	height: 375px;
+}
+
+#sidebar .sidebar-header {
+	padding: 10px;
+	color: white;
+	background: #101010;
+}
+
+#sidebar ul.components {
+	padding: 10px;
+	border-style: solid;
+	border-color: #101010;
+}
+
+#sidebar ul p {
+	color: black;
+	padding: 5px;
+}
+
+#sidebar ul li a {
+	padding: 5px;
+	font-size: 1.1em;
+	display: block;
+}
+
+/*Catalogue - Products.php */
+.catalogue
+{
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.brand
+{
+	font-weight: 900;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+.btn-block {
+	display: block;
+	width: 100%;
+	background-color: #101010;
+}
+
+.addButton
+{
+	background-color: #101010;
+    border: none;
+    color: white;
+	padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+ 
+.wrapper {
+	display: flex;
+	align-items: stretch;
+}
+
+/*Basket Page */
+.tbl-cart 
+{
+	font-size: 0.9em;
+	border: 1px solid #101010;
+	width: 76.9%;
+}
+
+.tbl-cart th 
+{
+	width: 15.38%;
+	background: #101010;
+	color: white;
+	font-weight: normal;
+	text-align:left;
+	border-bottom: 1.5px solid #101010;
+}
+		
+.basket
+{
+	width:76.9%;
+}
+		
+.basket td
+{
+	width: 15.38%;
+	text-align:center;
+	border-bottom: 1px solid #101010;
+}
+		
+.basket tr:nth-child(even)
+{
+	background-color: #f2f2f2;
+}
+		
+.info
+{
+	width: 76.9%;
+}
+
+.login
+{
+	height: 250px;
+}
