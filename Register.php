@@ -4,6 +4,7 @@
 	$completeMsg = ""; //the sign up hasn't been completed
 	$successful = 1; //true, the form status - completed now
 
+	// echo '<script type="text/javascript">alert("hello!");</script>';
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// name validation
 		if (empty($_POST["name"])) {
@@ -23,7 +24,7 @@
 		} else {
 			$addr = test_input($_POST["addr"]);
 		}
-		// username validation, up to 12 characters
+		// username validation, up to 12 characters, has to be unique
 		if (empty($_POST["uname"])) {
 			$uname = "Enter your user name";
 			$successful = 0;
@@ -33,6 +34,17 @@
 				$unameErr = "The user name has to be characters without spaces only.";
 				$successful = 0;
 			}
+
+			require 'conn.php';
+			
+			$sql = "SELECT Username FROM users WHERE Username LIKE '$uname'";
+			$result = $con->query($sql);
+
+			if ($result->num_rows > 0) { //someone is using the same username, the user has to change the username
+				$unameErr = "Someone is using the username, please use another username.";
+				$successful = 0;
+			}
+			$con->close();
 		}
 		// email validation
 		if (empty($_POST["email"])) {
@@ -75,7 +87,7 @@
 			// DRY principle -> reusing SQL connection statement
 			require 'conn.php';
 			//inserting signup form data into table avoiding SQL injectino with prepared statement
-			$stmt = $con->prepare("INSERT INTO userinfo (name, addr, uname, email, pwd) VALUES (?, ?, ?, ?, ?)");
+			$stmt = $con->prepare("INSERT INTO users (Name, Address, Username, Email, Password) VALUES (?, ?, ?, ?, ?)");
 			$stmt->bind_param("ssssi", $name, $addr, $uname, $email, $password);
 			$stmt->execute();
 
@@ -85,7 +97,8 @@
 			$nameErr = $addrErr = $unameErr = $emailErr = $passwordErr = $re_passwordErr = "";
 			$name = $addr = $uname = $email = $password = $re_password = "";
 			$completeMsg = "You have successfully signed up!";
-			echo $completeMsg;
+
+			
 		}
 
 	}
@@ -134,6 +147,13 @@
 		$(document).ready(function(){
 			$("#myBtn").click(function(){
 				$("#myModal").modal();
+			});
+		});
+		$(document).ready(function(){
+			$("#alert").hide();
+			$("#signupsubmit").click(function(){
+				$("#signup").fadeOut(400);
+				$("#alert").show();
 			});
 		});
 	</script>
@@ -251,7 +271,7 @@
 					</div>
 					<div class="form-group">
 						<label>Password:</label>
-						<input type="password" name="password" minlength="5" maxlength="10" placeholder="Enter your password, 5-10 numbers only" 
+						<input type="password" name="passwrd" minlength="5" maxlength="10" placeholder="Enter your password, 5-10 numbers only" 
 						value="<?php echo $password ?>" class="form-control" id="password" required>
 						<span class="error"> <?php echo $passwordErr;?></span>
 					</div>
@@ -263,6 +283,7 @@
 					</div>
 					<button type="submit" class="btn btn-default" id="signupsubmit">Sign up</button>
 				</form>
+				<div id="alert" class="alert alert-success"><?php echo $completeMsg ?></div>
 			</div>
 		</div>
 		

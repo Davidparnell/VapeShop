@@ -1,36 +1,41 @@
 <?php
-	$errormsg = "";
-	session_start();
-	
-	if (isset($_SESSION['Login_Status'])) //Is logged in? - set button text
-	{
-		$login = "Log out";
-	}
-	else
-	{
-		$login = "Log in";
-	}
-	
-	//Connect to the db and check if logged in
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$db = mysqli_connect("localhost","root","","groupproject");
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$result = mysqli_query($db,"select username from users where username = '$username' and password = '$password'");
-	$numrows = mysqli_num_rows($result);
-	if ($numrows == 1) // one result indicates successful login
-	{
-		//session_register("username");
-        $_SESSION['Login_Status'] = $username;
-		//echo $result;
-        header("location: Home.php"); // redir
-	}
-	else
-	{
-		$errormsg = "Incorrect User Name and Password";
-	}
-}
-	
+    session_start();
+    if (isset($_SESSION['Login_Status'])){
+        $uname = $_SESSION['Login_Status'];
+        $name = $addr = $email = "";
+    
+        require 'conn.php';
+        
+        $sql = "SELECT Username,Name,Address,Email FROM users WHERE Username LIKE '$uname'";
+        $result = $con->query($sql);
+    
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $name = $row["name"];
+                $addr = $row["addr"];
+                $email = $row["email"];
+            }
+        }
+        else {
+            echo $uname;
+            echo "0 results";
+        }
+        $con->close();
+
+    }
+    else {
+        header("Location: Home.php");
+    }
+    function change_pwd($uname, $pwd) {
+        require 'conn.php';
+        $sql = "UPDATE userinfo SET pwd = $pwd WHERE uname='$uname'";
+        try {
+            $con->query($sql);
+        } catch(Exception $e){
+            echo 'Message: ' .$e->getMessage();
+        }
+        $con->close();
+    }
 ?>
 <html>
 
@@ -63,18 +68,17 @@
 			background-color: #101010;
 		}
 		.error { color: red; }
+        .profile-pic {
+            width:300px;
+            height:300px;
+            max-width: 100%;
+            border-radius: 25px;
+        }
     </style>
-	<script>
-		$(document).ready(function(){
-			$("#myBtn").click(function(){
-				$("#myModal").modal();
-			});
-		});
-	</script>
 
-	</head>
+</head>
 	
-	<body>
+<body>
 	
 	<!--Nav Bar-->
 	<nav class="navbar navbar-inverse" style="border: none">
@@ -146,22 +150,25 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-3">
             <div class="row text-center">
-                <img class="circle" src="img/me.jpg" alt="mypic" style="width:300px; height:300px;">
+                <img class="profile-pic" src="img/me.jpg" alt="mypic">
             </div>
             <br>
             <div class="row text-center">
-            <button class="btn btn-primary">Change Picture</button>
+                <form action="imageup.php" method="post" enctype="multipart/form-data">
+                    <input type="file" style="float:right; padding: 3px;" name="fileToUpload" id="fileToUpload">
+                    <input type="submit" class="btn btn-primary" value="Change Image">
+                </form>
             </div>
             
         </div>
         <div class="col-sm-6" style="padding-left: 50px;">
-            <h2>Hi, 'Username'!</h2>
+            <h2>Hi, <b><?php echo $uname ?></b>!</h2>
             <h3>Name</h3>
-            <p>name</p>
+            <p><?php echo $name ?></p>
             <h3>Address</h3>
-            <p>address</p>
+            <p><?php echo $addr ?></p>
             <h3>Email</h3>
-            <p>email</p>
+            <p><?php echo $email ?></p>
         </div>
         <div class="col-sm-2" style="padding-left: 50px;">
             <br><br>
