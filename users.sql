@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 02:38 PM
+-- Generation Time: Dec 03, 2018 at 02:31 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -29,17 +29,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
+  `Name` varchar(30) COLLATE tis620_bin NOT NULL,
+  `Address` varchar(50) COLLATE tis620_bin NOT NULL,
   `Username` varchar(10) COLLATE tis620_bin NOT NULL,
-  `Password` varchar(15) COLLATE tis620_bin DEFAULT NULL,
-  `Email` varchar(20) COLLATE tis620_bin DEFAULT NULL
+  `Password` varchar(15) COLLATE tis620_bin NOT NULL,
+  `Email` varchar(20) COLLATE tis620_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`Username`, `Password`, `Email`) VALUES
-('Davidp', '123456', 'davidpcao5@gmail.com');
+INSERT INTO `users` (`Name`, `Address`, `Username`, `Password`, `Email`) VALUES
+('', '', 'Davidp', '123456', 'davidpcao5@gmail.com');
 
 --
 -- Indexes for dumped tables
